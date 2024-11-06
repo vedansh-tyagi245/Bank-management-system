@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
+    <div class="container-fluid text-center">
+      <a class="navbar-brand" href="#">
+        <i class="fa-solid fa-landmark"></i>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#about">About us</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#services">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#customer-support">Contact</a>
+          </li>
+          <li class="nav-item" id="auth-button">
+            <!-- <a class="nav-link" href="/#">Login</a> -->
+
+          </li>
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li> -->
+
+          <!-- <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          </li> -->
+        </ul>
+        <!-- <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
+      </div>
+    </div>
+  </nav>
+  <script>
+    // Check local storage for the login state
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+    const authButton = document.getElementById('auth-button');
+
+    function updateAuthButton() {
+      if (isLoggedIn) {
+        // authButton.innerHTML = '<a class="nav-link" href="/" >Logout</a>';
+      } else {
+        authButton.innerHTML = '<a class="nav-link" href="/login" >Login</a>';
+      }
+    }
+
+    function login() {
+      localStorage.setItem('isLoggedIn', 'true'); // Store login state in local storage
+      updateAuthButton();
+    }
+
+    function logout() {
+      localStorage.setItem('isLoggedIn', 'false'); // Clear login state in local storage
+      updateAuthButton();
+    }
+
+    // Initial call to set the button state
+    updateAuthButton();
+  </script>
+</body>
+
+</html>

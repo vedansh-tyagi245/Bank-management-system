@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        body {
+            margin: 0;
+            background: #f3f4f6;
+            font-family: Arial, sans-serif;
+        }
+        .welcome-message {
+            text-align: center;
+            color: #007bff;
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 20px; /* Add some space from the top */
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-message" id="welcome-message">Welcome!</div>
+
+    <script>
+        // This function will be called when the page loads
+        function displayWelcomeMessage() {
+            const userName = localStorage.getItem('Name'); // Fetch the name from local storage
+            console.log('Function displayWelcomeMessage called.'); // Log to verify function call
+
+            if (userName) {
+                console.log('Retrieved name from local storage:', userName); // Log the retrieved name
+                const welcomeMessageDiv = document.getElementById('welcome-message');
+                welcomeMessageDiv.innerHTML = `Welcome, ${userName}!`; // Display the welcome message
+            } else {
+                console.log('No name found in local storage.'); // Log if no name is found
+            }
+        }
+
+        // Call the function to display the welcome message when the page loads
+        displayWelcomeMessage();
+    </script>
+
+</body>
+</html>

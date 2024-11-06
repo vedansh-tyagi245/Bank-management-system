@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+
+# IDEs and Editors
+.vscode/
+*.swp
+
+# Database
+*.sqlite3
+
+# Flask-specific
+instance/
+*.log
+
+# MacOS-specific
+.DS_Store

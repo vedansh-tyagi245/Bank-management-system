@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+        <!-- Sidebar -->
+        <div>
+            {% include './Dashboard-components/Sidebar.html' %}
+        </div>
+
+        <!-- Heading -->
+        <div
+            style="text-align: center; height: 80px; width: 100vw; border: 2px solid black; margin-left: 260px; margin-right: 10px;">
+            {% include './Dashboard-components/Welcome-heading.html' %}
+        </div>
+
+        <!-- Main body for different forms -->
+        <div>
+            {% include './Dashboard-components/MainBody.html' %}
+            <!-- Main body is empty right now -->
+        </div>
+
+    <script>
+        // Function to check if the user is logged in
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn'); // Get the login status from local storage
+            if (isLoggedIn !== 'true') {
+                // If not logged in, redirect to login page
+                window.location.href = '/login'; // Change this to your actual login page URL
+            }
+        }
+
+        // Check login status when the page loads
+        window.onload = checkLoginStatus;
+    </script>
+
+</body>
+
+</html>

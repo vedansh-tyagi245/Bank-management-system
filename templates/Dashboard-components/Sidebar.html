@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Sidebar</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            background: #f0f2f5;
+            height: 100vh;
+            overflow: hidden;
+            /* Prevent scrolling */
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(135deg, #007bff, #00c6ff);
+            color: #fff;
+            padding: 20px;
+            position: fixed;
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            transition: width 0.3s ease;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 24px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            margin: 15px 0;
+        }
+
+        .sidebar ul li a {
+            color: #fff;
+            text-decoration: none;
+            padding: 12px;
+            display: block;
+            border-radius: 10px;
+            /* Rounded edges */
+            transition: background 0.3s ease, transform 0.2s ease;
+            /* Add transform for effect */
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .sidebar ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            /* Semi-transparent hover */
+            transform: translateY(-2px);
+            /* Slight lift effect */
+        }
+
+        /* Responsive behavior */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+                overflow: hidden;
+            }
+
+            .sidebar h2 {
+                font-size: 16px;
+                display: none;
+            }
+
+            .sidebar ul li a {
+                font-size: 14px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar">
+        <h2>Banking App</h2>
+        <ul>
+            <li><a href="#" onclick="getBalance()">Check Balance</a></li>
+            <li><a href="#" onclick="deposit()">Deposit Money</a></li>
+            <li><a href="#" onclick="transfer()">Transfer Money</a></li>
+            <li><a href="#" onclick="withdraw()">Withdraw Money</a></li>
+            <li><a href="#" onclick="updatePass()">Update Password</a></li>
+            <li><a href="#" onclick="logout()">Logout</a></li>
+        </ul>
+    </div>
+
+
+    <script>
+        function getBalance() {
+            // Retrieve the account number from localStorage
+            const accountNo = localStorage.getItem('accountNo');
+
+            // Check if the account number is available
+            if (!accountNo) {
+                alert('Account number not found. Please log in again.');
+                return;
+            }
+
+            // Send the account number to the Flask backend using fetch
+            fetch('/get-balance', {
+                method: 'POST', // Use POST to send account number securely
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ accountNo: accountNo }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert(`Your current balance is ₹ ${data.balance}`);
+                    } else {
+                        alert('Error fetching balance: ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred while fetching the balance.');
+                });
+        }
+        function deposit() {
+            // Prompt the user to enter the deposit amount
+            const depositAmount = prompt("Enter the amount you want to deposit:");
+
+            // Validate the deposit amount
+            if (!depositAmount || isNaN(depositAmount) || parseFloat(depositAmount) <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            // Get the account number from local storage
+            const accountNo = localStorage.getItem('accountNo');
+
+            // Check if the account number is available
+            if (!accountNo) {
+                alert("Account number not found. Please log in again.");
+                return;
+            }
+
+            // Send the deposit request to the backend using fetch
+            fetch('/deposit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    accountNo: accountNo,
+                    amount: parseFloat(depositAmount)
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(`Deposit successful! Your new balance is: ₹${data.newBalance}`);
+                    } else {
+                        alert(`Deposit failed: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+        }
+        function transfer() {
+            // Prompt the user for the recipient's account number and the transfer amount
+            const recipientAccountNo = prompt("Enter the recipient's account number:");
+            const transferAmount = prompt("Enter the amount you want to transfer:");
+
+            // Validate the inputs
+            if (!recipientAccountNo || isNaN(recipientAccountNo)) {
+                alert("Please enter a valid recipient account number.");
+                return;
+            }
+            if (!transferAmount || isNaN(transferAmount) || parseFloat(transferAmount) <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            // Get the sender's account number from local storage
+            const senderAccountNo = localStorage.getItem('accountNo');
+
+            // Check if the sender's account number is available
+            if (!senderAccountNo) {
+                alert("Sender account number not found. Please log in again.");
+                return;
+            }
+
+            // Send the transfer request to the backend using fetch
+            fetch('/transfer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    senderAccountNo: senderAccountNo,
+                    recipientAccountNo: recipientAccountNo,
+                    amount: parseFloat(transferAmount)
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(`Transfer successful! Your new balance is: $${data.newBalance}`);
+                    } else {
+                        alert(`Transfer failed: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+        }
+        function withdraw() {
+            // Prompt the user for the withdrawal amount
+            const withdrawalAmount = prompt("Enter the amount you want to withdraw:");
+
+            // Validate the input
+            if (!withdrawalAmount || isNaN(withdrawalAmount) || parseFloat(withdrawalAmount) <= 0) {
+                alert("Please enter a valid amount.");
+                return;
+            }
+
+            // Get the account number from local storage
+            const accountNo = localStorage.getItem('accountNo');
+
+            // Check if the account number is available
+            if (!accountNo) {
+                alert("Account number not found. Please log in again.");
+                return;
+            }
+
+            // Send the withdrawal request to the backend using fetch
+            fetch('/withdraw', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    accountNo: accountNo,
+                    amount: parseFloat(withdrawalAmount)
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert(`Withdrawal successful! Your new balance is: $${data.newBalance}`);
+                    } else {
+                        alert(`Withdrawal failed: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+        }
+        function updatePass() {
+            // Prompt the user for their current password and new password
+            const currentPassword = prompt("Enter your current password:");
+            const newPassword = prompt("Enter your new password:");
+
+            // Validate the input
+            if (!currentPassword || !newPassword) {
+                alert("Please fill out both fields.");
+                return;
+            }
+
+            // Get the account number from local storage
+            const accountNo = localStorage.getItem('accountNo');
+
+            // Check if the account number is available
+            if (!accountNo) {
+                alert("Account number not found. Please log in again.");
+                return;
+            }
+
+            // Send the update password request to the backend using fetch
+            fetch('/update-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    accountNo: accountNo,
+                    currentPassword: currentPassword,
+                    newPassword: newPassword
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        alert('Password updated successfully!');
+                    } else {
+                        alert(`Password update failed: ${data.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                });
+        }
+        function logout() {
+            // Remove the account information from local storage
+            localStorage.removeItem('accountNo');
+            localStorage.removeItem('Name');
+            localStorage.removeItem('isLoggedIn');
+
+            // Optionally, redirect the user to the login page after logging out
+            window.location.href = '/login'; // Change this URL to your login page
+        }    
+    </script>
+</body>
+
+</html>

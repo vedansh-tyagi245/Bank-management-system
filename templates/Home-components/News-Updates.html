@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Homepage - News and Updates</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .news-card {
+            border: 1px solid #007bff; /* Add border color */
+            border-radius: 8px; /* Rounded corners */
+            padding: 20px; /* Inner padding */
+            margin-bottom: 20px; /* Space between news items */
+            transition: transform 0.3s; /* Smooth hover effect */
+        }
+        .news-card:hover {
+            transform: scale(1.05); /* Slightly scale up on hover */
+        }
+        .icon {
+            font-size: 50px; /* Size of the icon */
+            color: #007bff; /* Icon color */
+            margin-bottom: 15px; /* Space below icon */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container my-5">
+    <h2 class="text-center mb-4">News and Updates</h2>
+    <div class="row">
+        <!-- Blog Section -->
+        <div class="col-md-6">
+            <h4>Latest Blog Posts</h4>
+            <div class="news-card">
+                <h5>Understanding Your Credit Score</h5>
+                <p>Published on: October 20, 2024</p>
+                <p>Your credit score plays a crucial role in your financial health. Learn what factors affect your score and how to improve it.</p>
+                <a href="#" class="btn btn-primary">Read More</a>
+            </div>
+            <div class="news-card">
+                <h5>Tips for Saving Money</h5>
+                <p>Published on: October 15, 2024</p>
+                <p>Discover effective strategies to save money and reach your financial goals faster.</p>
+                <a href="#" class="btn btn-primary">Read More</a>
+            </div>
+            <div class="news-card">
+                <h5>New Digital Banking Features</h5>
+                <p>Published on: October 10, 2024</p>
+                <p>We've launched exciting new features in our digital banking platform. Check them out to enhance your banking experience.</p>
+                <a href="#" class="btn btn-primary">Read More</a>
+            </div>
+        </div>
+
+        <!-- Important Notices Section -->
+        <div class="col-md-6">
+            <h4>Important Notices</h4>
+            <div class="news-card">
+                <h5>Scheduled Maintenance</h5>
+                <p><strong>Date:</strong> October 30, 2024</p>
+                <p>Our online banking services will be temporarily unavailable for scheduled maintenance from 2 AM to 4 AM. We apologize for any inconvenience.</p>
+            </div>
+            <div class="news-card">
+                <h5>Holiday Hours</h5>
+                <p><strong>Date:</strong> November 26, 2024</p>
+                <p>Please note that our branches will be closed on Thanksgiving Day. We wish you a happy holiday!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

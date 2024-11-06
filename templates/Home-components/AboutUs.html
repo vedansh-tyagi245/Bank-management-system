@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - International Bank</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f4f4f4; /* Light gray background for better contrast */
+            color: #333; /* Dark text color */
+            font-family: 'Arial', sans-serif; /* Simple font for readability */
+            line-height: 1.6; /* Improved line height */
+        }
+
+        .hero-section {
+            background-image: url('https://images.unsplash.com/photo-1514151441798-648d2c5d1b59?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDB8fGJhbmt8ZW58MHx8fHwxNjY3MzMzNTc2&ixlib=rb-1.2.1&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            color: black;
+            text-align: center;
+            padding: 100px 20px; /* More padding for a spacious feel */
+        }
+
+        .hero-section h1 {
+            font-size: 3rem; /* Responsive title size */
+            font-weight: bold;
+            margin-bottom: 15px; /* Spacing below title */
+        }
+
+        .hero-section p {
+            font-size: 1.25rem; /* Subtitle size */
+            margin-bottom: 30px; /* Spacing below subtitle */
+        }
+
+        .btn-hero {
+            background-color: #5c636a; /* Primary button color */
+            border: none;
+            color: white;
+            padding: 12px 25px; /* Padding for buttons */
+            font-size: 1rem;
+            border-radius: 25px; /* Rounded buttons */
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-hero:hover {
+            filter: brightness(90%); 
+        }
+
+        /* Section styles */
+        .section {
+            padding: 60px 20px; /* Uniform padding */
+            background-color: #ffffff; /* White background for sections */
+            border-radius: 8px; /* Slightly rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
+            margin-bottom: 30px; /* Spacing between sections */
+        }
+
+        .section h2 {
+            font-size: 2.5rem; /* Section title size */
+            text-align: center; /* Center align titles */
+            color: #007bff; /* Consistent color for titles */
+            margin-bottom: 20px; /* Spacing below section titles */
+        }
+
+        .section p {
+            font-size: 1.1rem; /* Text size for paragraphs */
+            text-align: center; /* Center-align paragraph text */
+            margin-bottom: 40px; /* Spacing below paragraphs */
+        }
+
+        /* Team Member styles */
+        .team-member {
+            text-align: center; /* Center-align team member info */
+            margin-bottom: 30px; /* Spacing below team member card */
+        }
+
+        .team-member img {
+            border-radius: 50%; /* Circular profile images */
+            width: 150px; /* Fixed width */
+            height: 150px; /* Fixed height */
+            border: 2px solid #007bff; /* Border for images */
+        }
+
+        .team-member h5 {
+            margin-top: 15px; /* Space above name */
+            font-weight: bold; /* Bold names */
+        }
+
+        .team-member p {
+            color: gray; /* Gray color for positions */
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #007bff; /* Footer background color */
+            color: white; /* Footer text color */
+            text-align: center; /* Center-align footer text */
+            padding: 20px 0; /* Padding for footer */
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero-section" id="about">
+        <h1>About Us</h1>
+        <p>Building a Better Financial Future for Everyone</p>
+        <a href="/about" class="btn btn-light btn-lg btn-hero">Learn More</a>
+    </div>
+
+    <!-- Mission Section -->
+    <div class="container section" id="mission">
+        <h2>Our Mission</h2>
+        <p>
+            At International Bank, we strive to empower our customers by providing innovative financial solutions,
+            exceptional customer service, and unwavering support. Our mission is to create a positive impact in the
+            communities we serve.
+        </p>
+    </div>
+
+    <!-- Team Section -->
+    <div class="container section team-section">
+        <h2>Meet Our Team</h2>
+        <div class="row">
+            <!-- Team Member 1 -->
+            <div class="col-md-4 team-member">
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="John Doe">
+                <h5>John Doe</h5>
+                <p>CEO</p>
+            </div>
+            <!-- Team Member 2 -->
+            <div class="col-md-4 team-member">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Jane Smith">
+                <h5>Jane Smith</h5>
+                <p>Chief Financial Officer</p>
+            </div>
+            <!-- Team Member 3 -->
+            <div class="col-md-4 team-member">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Robert Johnson">
+                <h5>Robert Johnson</h5>
+                <p>Head of Customer Service</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+
+</html>

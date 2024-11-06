@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #f0f4f8;
+            padding: 20px;
+        }
+
+        .calculator-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            text-align: center;
+        }
+
+        .calculator-container h1 {
+            color: #1f4037;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .slider-label {
+            text-align: left;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+
+        .input-slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .output-value {
+            background: #e6e9f0;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #1f4037;
+            margin-bottom: 20px;
+        }
+
+        .result-container {
+            background: #1f4037;
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+        }
+
+        .result-container h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        .result-container p {
+            font-size: 18px;
+            margin: 5px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    {% include './Home-components/Navbar.html' %}
+    <br><br>
+    <div class="calculator-container">
+        <h1>Loan Calculator</h1>
+
+        <label class="slider-label" for="principal">Principal Amount (₹):</label>
+        <input type="range" id="principal" class="input-slider" min="10000" max="1000000" step="1000" value="40000" oninput="updateValues()">
+        <div class="output-value" id="principalValue">₹ 40,000</div>
+
+        <label class="slider-label" for="interest">Interest Rate (% per annum):</label>
+        <input type="range" id="interest" class="input-slider" min="1" max="15" step="0.1" value="5" oninput="updateValues()">
+        <div class="output-value" id="interestValue">5.0% per annum</div>
+
+        <label class="slider-label" for="installment">Monthly Installment (₹):</label>
+        <input type="range" id="installment" class="input-slider" min="1000" max="50000" step="500" value="40000" oninput="updateValues()">
+        <div class="output-value" id="installmentValue">₹ 40,000</div>
+
+        <div class="result-container">
+            <h3>Total Time to Clear Loan</h3>
+            <p id="resultText">Approximately <span id="yearsToClear">0</span> years</p>
+        </div>
+    </div>
+
+    <footer>&copy; 2024 Your Bank Name. All rights reserved.</footer>
+
+    <script>
+        function updateValues() {
+            const principal = parseFloat(document.getElementById('principal').value);
+            const interest = parseFloat(document.getElementById('interest').value);
+            const installment = parseFloat(document.getElementById('installment').value);
+
+            document.getElementById('principalValue').textContent = `₹ ${principal.toLocaleString()}`;
+            document.getElementById('interestValue').textContent = `${interest.toFixed(1)}% per annum`;
+            document.getElementById('installmentValue').textContent = `₹ ${installment.toLocaleString()}`;
+
+            calculateYearsToClear(principal, interest, installment);
+        }
+
+        function calculateYearsToClear(principal, interest, installment) {
+            if (installment > 0) {
+                // Calculate monthly interest rate
+                const monthlyInterestRate = (interest / 100) / 12;
+                const totalMonths = Math.ceil(principal / installment);
+                let months = 0;
+
+                let remainingPrincipal = principal;
+                while (remainingPrincipal > 0) {
+                    months++;
+                    remainingPrincipal += remainingPrincipal * monthlyInterestRate - installment;
+                    if (remainingPrincipal < 0) {
+                        remainingPrincipal = 0;
+                    }
+                }
+
+                const years = (months / 12).toFixed(2);
+                document.getElementById('yearsToClear').textContent = years;
+            } else {
+                document.getElementById('yearsToClear').textContent = '0';
+            }
+        }
+    </script>
+</body>
+
+</html>

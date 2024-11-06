@@ -1,0 +1,3 @@
+myenv\Scripts\activate
+
+i can create a active link in navbar
